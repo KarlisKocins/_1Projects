@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f819108b-9982-480b-9f82-ef2ebe8f88da" name="Changes" comment="Testing #2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +15,9 @@
   <component name="Git.Settings">
     <branch-grouping />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/Main.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -89,6 +91,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Testing." />
     <MESSAGE value="Testing #2" />
+    <MESSAGE value="Converted binary numbers to Hex" />
     <option name="LAST_COMMIT_MESSAGE" value="Testing #2" />
   </component>
   <component name="XDebuggerManager">
