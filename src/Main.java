@@ -8,7 +8,7 @@ public class Main {
             System.out.print("Ievadiet komandu: ");
             String command = sc.nextLine().toLowerCase();
             switch (command) {
-                case "comp" -> {
+                case "comp":
                     System.out.print("String plz: ");
                     String str = sc.nextLine().toUpperCase();
                     if (!str.matches("^[ACGT]*$")) {
@@ -16,9 +16,10 @@ public class Main {
                         continue;
                     } else {
                         comp(str);
+                        break;
                     }
-                }
-                case "decomp" -> System.out.println("Coming Soon!");
+                case "decomp":
+                    System.out.println("Coming Soon!");
             }
         }
     }
@@ -46,13 +47,6 @@ public class Main {
         if (BitIndex != 0) { // add remaining bits to linkedArray
             test.append("00".repeat(4 - BitIndex));
             linkedArray.add(ByteIndex, String.valueOf(test));
-        }
-        // Convert binary strings to hexadecimal and put them back into linkedArray
-        for (int i = 1; i < linkedArray.size(); i++) {
-            String binary = linkedArray.get(i);
-            int decimal = Integer.parseInt(binary, 2);
-            String hexStr = Integer.toString(decimal, 16);
-            linkedArray.set(i, hexStr.toUpperCase());
         }
         System.out.println(linkedArray);
     }
