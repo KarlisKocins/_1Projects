@@ -1,24 +1,38 @@
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        while (true) {
+        boolean a = true;
+        while (a) {
             System.out.print("Ievadiet komandu: ");
             String command = sc.nextLine().toLowerCase();
-            switch (command) {
-                case "comp" -> {
-                    System.out.print("String plz: ");
-                    String str = sc.nextLine().toUpperCase();
+            String[] dns = command.split(" ");
+            switch (dns[0]) {
+                case "comp": {
+                    String str = dns[1].toUpperCase();
                     if (!str.matches("^[ACGT]*$")) {
                         System.out.println("wrong command format");
                         continue;
                     } else {
                         comp(str);
+                        break;
                     }
                 }
-                case "decomp" -> System.out.println("Coming Soon!");
+                case "decomp": {
+                    System.out.print("String plz: ");
+                    String Line = sc.nextLine();
+                    String[] str = Line.split(" ");
+                    decomp(str);
+                    break;
+                }
+                case "exit": {
+                    System.out.println("Goodbye!");
+                    a = false;
+                    break;
+                }
             }
         }
     }
@@ -31,10 +45,18 @@ public class Main {
         for (int i = 0; i < str.length(); i++) {
             byte b = 0;
             switch (str.charAt(i)) {
-                case 'A' -> b = 0;
-                case 'C' -> b = 1;
-                case 'G' -> b = 2;
-                case 'T' -> b = 3;
+                case 'A':
+                    b = 0;
+                    break;
+                case 'C':
+                    b = 1;
+                    break;
+                case 'G':
+                    b = 2;
+                    break;
+                case 'T':
+                    b = 3;
+                    break;
             }
             bytes[ByteIndex] |= (b << (6 - 2 * BitIndex));
             BitIndex++;
@@ -51,6 +73,26 @@ public class Main {
             String hexStr = String.format("%2X", b);
             linkedArray.add(hexStr);
         }
-        System.out.println(linkedArray);
+        String list = Arrays.toString(linkedArray.toArray()).replace("[", "").replace("]", "").replace(",","").replace("  ", " ");
+        System.out.println(list);
+    }
+
+    private static void decomp(String[] str) {
+        LinkedList<String> test_hex = new LinkedList<>();
+        LinkedList<String> test_binary = new LinkedList<>();
+        byte[] byteArr = new byte[str.length - 1];
+        String letters = (str[1]);
+        test_hex.add(letters);
+        String binary = "";
+        for (int i = 2; i < str.length; i++) {
+            int str_int = Integer.parseInt(str[i]);
+            String str_hex = Integer.toHexString(str_int & 0xFF);
+            String str_binary = Integer.toBinaryString(str_int);
+            test_hex.add(str_hex);
+            test_binary.add(str_binary);
+        }
+        System.out.println(test_hex);
+        System.out.println("-------------");
+        System.out.println(test_binary);
     }
 }
