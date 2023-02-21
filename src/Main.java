@@ -76,18 +76,20 @@ public class Main {
 
     private static void decomp(String[] str) {
         LinkedList<String> test_hex = new LinkedList<>();
-        LinkedList<String> test_binary = new LinkedList<>();
-        byte[] byteArr = new byte[str.length - 3];
-        String binary = "";
+        LinkedList<String> test_bin = new LinkedList<>();
         for (int i = 2; i < str.length; i++) {
             int str_int = Integer.parseInt(str[i]);
             String str_hex = Integer.toHexString(str_int & 0xFF).toUpperCase();
-            String str_binary = Integer.toBinaryString(str_int);
             test_hex.add(str_hex);
-            test_binary.add(str_binary);
         }
-        System.out.println(test_hex);
+        String list = Arrays.toString(test_hex.toArray()).replace("[", "").replace("]", "").replace(",","").replace("  ", " ");
+        System.out.println(list);
         System.out.println("-------------");
-        System.out.println(test_binary);
+        for (int i = 1; i < test_hex.size(); i++) {
+            int dec = Integer.parseInt(test_hex.get(i), 16);
+            String binaryStr = String.format("%8s", Integer.toBinaryString(dec)).replace(' ', '0');
+            test_bin.add(binaryStr);
+        }
+        System.out.println(test_bin);
     }
 }
