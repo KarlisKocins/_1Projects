@@ -22,10 +22,7 @@ public class Main {
                     }
                 }
                 case "decomp": {
-                    System.out.print("String plz: ");
-                    String Line = sc.nextLine();
-                    String[] str = Line.split(" ");
-                    decomp(str);
+                    decomp(dns);
                     break;
                 }
                 case "exit": {
@@ -80,13 +77,11 @@ public class Main {
     private static void decomp(String[] str) {
         LinkedList<String> test_hex = new LinkedList<>();
         LinkedList<String> test_binary = new LinkedList<>();
-        byte[] byteArr = new byte[str.length - 1];
-        String letters = (str[1]);
-        test_hex.add(letters);
+        byte[] byteArr = new byte[str.length - 3];
         String binary = "";
         for (int i = 2; i < str.length; i++) {
             int str_int = Integer.parseInt(str[i]);
-            String str_hex = Integer.toHexString(str_int & 0xFF);
+            String str_hex = Integer.toHexString(str_int & 0xFF).toUpperCase();
             String str_binary = Integer.toBinaryString(str_int);
             test_hex.add(str_hex);
             test_binary.add(str_binary);
