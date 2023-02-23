@@ -102,6 +102,7 @@ public class Main {
             if (dauzi <= burti * 2){
                 System.out.println("wrong command format");
             }else {
+                System.out.println(list);
                 StringBuilder dnaStr = new StringBuilder();
                 for (int i = 0; i < burti * 2; i += 2) {
                     String codon = binaryStr.substring(i, i + 2);
@@ -110,8 +111,7 @@ public class Main {
                             dnaStr.append("A");
                             break;
                         case "01":
-                            System.out.println(list);
-         dnaStr.append("C");
+                            dnaStr.append("C");
                             break;
                         case "10":
                             dnaStr.append("G");
