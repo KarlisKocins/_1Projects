@@ -5,60 +5,42 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        boolean a = true;
-        while (a) {
+        while (true) {
             System.out.print("Ievadiet komandu: ");
             String command = sc.nextLine().toLowerCase();
             String[] dns = command.split(" ");
             switch (dns[0]) {
-                case "comp": {
+                case "comp" -> {
                     String str = dns[1].toUpperCase();
                     if (!str.matches("^[ACGT]*$")) {
                         System.out.println("wrong command format");
-                        continue;
                     } else {
                         comp(str);
-                        break;
                     }
                 }
-                case "decomp": {
-                        decomp(dns);
-                        break;
-                }
-                case "about": {
-                    System.out.println("221RDB429 Kārlis Kociņš 16.Grupa");
-                    break;
-                }
-                case "exit": {
+                case "decomp" -> decomp(dns);
+                case "about" -> System.out.println("221RDB429 Kārlis Kociņš 16.Grupa");
+                case "exit" -> {
                     System.out.println("Goodbye!");
-                    a = false;
-                    break;
+                    return;
                 }
             }
         }
     }
 
     private static void comp(String str) {
-    LinkedList<String> linkedArray = new LinkedList<>();
-    byte[] bytes = new byte[(str.length() / 4) + 1];
-    linkedArray.add(0, String.valueOf(str.length()));
-    int BitIndex = 0, ByteIndex = 0;
+        LinkedList<String> linkedArray = new LinkedList<>();
+        byte[] bytes = new byte[(str.length() / 4) + 1];
+        linkedArray.add(0, String.valueOf(str.length()));
+        int BitIndex = 0, ByteIndex = 0;
         for (int i = 0; i < str.length(); i++) {
-            byte b = 0;
-            switch (str.charAt(i)) {
-                case 'A':
-                    b = 0;
-                    break;
-                case 'C':
-                    b = 1;
-                    break;
-                case 'G':
-                    b = 2;
-                    break;
-                case 'T':
-                    b = 3;
-                    break;
-            }
+            byte b = switch (str.charAt(i)) {
+                case 'A' -> 0;
+                case 'C' -> 1;
+                case 'G' -> 2;
+                case 'T' -> 3;
+                default -> throw new IllegalStateException("Unexpected value: " + str.charAt(i));
+            };
             bytes[ByteIndex] |= (b << (6 - 2 * BitIndex));
             BitIndex++;
             if (BitIndex == 4){
@@ -67,7 +49,7 @@ public class Main {
             }
         }
         if (BitIndex != 0) { // add remaining bits to linkedArray
-            bytes[ByteIndex] |= (0 << (6 - 2 * BitIndex));
+            bytes[ByteIndex] |= (0);
         }
         // Convert binary strings to hexadecimal and put them back into linkedArray
         for (byte b : bytes) {
@@ -107,21 +89,13 @@ public class Main {
                 for (int i = 0; i < burti * 2; i += 2) {
                     String codon = binaryStr.substring(i, i + 2);
                     switch (codon) {
-                        case "00":
-                            dnaStr.append("A");
-                            break;
-                        case "01":
-                            dnaStr.append("C");
-                            break;
-                        case "10":
-                            dnaStr.append("G");
-                            break;
-                        case "11":
-                            dnaStr.append("T");
-                            break;
+                        case "00" -> dnaStr.append("A");
+                        case "01" -> dnaStr.append("C");
+                        case "10" -> dnaStr.append("G");
+                        case "11" -> dnaStr.append("T");
                     }
                 }
-                System.out.println(dnaStr.toString());
+                System.out.println(dnaStr);
             }
         }
     }
