@@ -22,7 +22,11 @@ public class Main {
                     }
                 }
                 case "decomp": {
-                    decomp(dns);
+                        decomp(dns);
+                        break;
+                }
+                case "about": {
+                    System.out.println("221RDB429 Kārlis Kociņš 16.Grupa");
                     break;
                 }
                 case "exit": {
@@ -75,39 +79,50 @@ public class Main {
     }
 
     private static void decomp(String[] str) {
-        LinkedList<String> test_hex = new LinkedList<>();
-        int burti = Integer.parseInt(str[2]);
-        for (int i = 2; i < str.length; i++) {
-            int str_int = Integer.parseInt(str[i]);
-            String str_hex = Integer.toHexString(str_int & 0xFF).toUpperCase();
-            test_hex.add(str_hex);
-        }
-        String list = Arrays.toString(test_hex.toArray()).replace("[", "").replace("]", "").replace(",","").replace("  ", " ");
-        System.out.println(list);
-        StringBuilder sb = new StringBuilder();
-        for (int i = 1; i < test_hex.size(); i++) {
-            int dec = Integer.parseInt(test_hex.get(i), 16);
-            sb.append(String.format("%8s", Integer.toBinaryString(dec)).replace(' ', '0'));
-        }
-        String binaryStr = sb.toString();
-        StringBuilder dnaStr = new StringBuilder();
-        for (int i = 0; i < burti*2; i += 2) {
-            String codon = binaryStr.substring(i, i + 2);
-            switch (codon) {
-                case "00":
-                    dnaStr.append("A");
-                    break;
-                case "01":
-                    dnaStr.append("C");
-                    break;
-                case "10":
-                    dnaStr.append("G");
-                    break;
-                case "11":
-                    dnaStr.append("T");
-                    break;
+        int daudzums = Integer.parseInt(str[1]);
+        int daudzumi = Integer.parseInt(String.valueOf(str.length));
+        if (daudzums != daudzumi - 2){
+            System.out.println("wrong command format");
+        }else {
+            LinkedList<String> test_hex = new LinkedList<>();
+            int burti = Integer.parseInt(str[2]);
+            for (int i = 2; i < str.length; i++) {
+                int str_int = Integer.parseInt(str[i]);
+                String str_hex = Integer.toHexString(str_int & 0xFF).toUpperCase();
+                test_hex.add(str_hex);
+            }
+            String list = Arrays.toString(test_hex.toArray()).replace("[", "").replace("]", "").replace(",", "").replace("  ", " ");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i < test_hex.size(); i++) {
+                int dec = Integer.parseInt(test_hex.get(i), 16);
+                sb.append(String.format("%8s", Integer.toBinaryString(dec)).replace(' ', '0'));
+            }
+            String binaryStr = sb.toString();
+            int dauzi = binaryStr.length();
+            if (dauzi <= burti * 2){
+                System.out.println("wrong command format");
+            }else {
+                StringBuilder dnaStr = new StringBuilder();
+                for (int i = 0; i < burti * 2; i += 2) {
+                    String codon = binaryStr.substring(i, i + 2);
+                    switch (codon) {
+                        case "00":
+                            dnaStr.append("A");
+                            break;
+                        case "01":
+                            System.out.println(list);
+         dnaStr.append("C");
+                            break;
+                        case "10":
+                            dnaStr.append("G");
+                            break;
+                        case "11":
+                            dnaStr.append("T");
+                            break;
+                    }
+                }
+                System.out.println(dnaStr.toString());
             }
         }
-        System.out.println(dnaStr.toString());
     }
 }
